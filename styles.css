@@ -483,6 +483,10 @@ button { font-family: inherit; }
   overflow-x: auto;
   scrollbar-width: none;
 }
+.tabs.is-scrollable {
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+}
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
   appearance: none;
@@ -502,7 +506,6 @@ button { font-family: inherit; }
 
 /* Checklists */
 .checklist-card { padding-top: 20px; }
-.checklist-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
 .checklist-count {
   font-family: var(--font-display);
   font-weight: 700;
@@ -511,18 +514,44 @@ button { font-family: inherit; }
   background: rgba(124, 92, 255, 0.1);
   padding: 4px 12px;
   border-radius: var(--radius-pill);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  white-space: nowrap;
+}
+.checklist-count.is-complete { background: rgba(51, 90, 73, 0.14); color: var(--color-green); }
+
+.prod-section-sub {
+  font-size: 13.5px;
+  color: var(--color-text-soft);
+  line-height: 1.5;
+  margin: 0 2px 12px;
 }
 
 .checklist { list-style: none; margin: 0; padding: 0; }
 .checklist-item {
+  padding: 4px 2px;
+  border-bottom: 1px solid var(--color-border);
+}
+.checklist-item:last-child { border-bottom: none; }
+
+.checklist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checklist-toggle {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 15px 2px;
-  border-bottom: 1px solid var(--color-border);
+  background: none;
+  border: none;
+  padding: 11px 0;
+  margin: 0;
   cursor: pointer;
+  text-align: left;
 }
-.checklist-item:last-child { border-bottom: none; }
 
 .checklist-box {
   width: 24px;
@@ -540,8 +569,65 @@ button { font-family: inherit; }
 .checklist-box svg { opacity: 0; transform: scale(0.5); transition: all 0.2s var(--ease); }
 .checklist-item.is-checked .checklist-box svg { opacity: 1; transform: scale(1); }
 
-.checklist-text { font-size: 15px; font-weight: 700; color: var(--color-header); }
+.checklist-text { font-size: 15px; font-weight: 700; color: var(--color-header); line-height: 1.35; }
 .checklist-item.is-checked .checklist-text { color: var(--color-text-faint); text-decoration: line-through; }
+
+.checklist-info-btn {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--color-text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), color 0.2s var(--ease);
+}
+.checklist-item.is-info-open .checklist-info-btn { transform: rotate(180deg); color: var(--color-violet); }
+
+.checklist-info-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s var(--ease);
+}
+.checklist-item.is-info-open .checklist-info-body { max-height: 240px; }
+.checklist-info-text {
+  padding: 0 2px 14px 38px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-text-soft);
+}
+
+/* Fotos que venden */
+.photo-guide-card { padding-top: 20px; }
+.photo-guide-list { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.photo-guide-item { display: flex; gap: 14px; align-items: flex-start; }
+.photo-guide-num {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-violet);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo-guide-text { display: flex; flex-direction: column; gap: 3px; padding-top: 3px; }
+.photo-guide-title { font-weight: 800; font-size: 15px; color: var(--color-header); }
+.photo-guide-body { font-size: 13.5px; line-height: 1.5; color: var(--color-text-soft); }
+
+.photo-guide-tip {
+  background: rgba(197, 164, 109, 0.12);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+.photo-guide-tip p { font-size: 13.5px; line-height: 1.55; color: var(--color-text); margin: 0; }
 
 /* =========================================================
    MÁS — accordion, safety, settings

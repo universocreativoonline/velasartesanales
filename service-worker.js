@@ -1,5 +1,5 @@
 /* Velas Studio — Service Worker */
-const CACHE_NAME = "velas-studio-v5";
+const CACHE_NAME = "velas-studio-v7";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -18,7 +18,7 @@ const APP_SHELL = [
   "./assets/inspiracion/vela_minimalista.jpg",
   "./assets/inspiracion/vela_premium.jpg",
   "./assets/inspiracion/vela_floral.jpg",
-  "./assets/inspiracion/velas_navideñas_1.jpg",
+  "./assets/inspiracion/velas_navidenas_1.jpg",
   "./assets/inspiracion/vela_de_regalo.jpg",
 ];
 

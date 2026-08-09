@@ -225,29 +225,53 @@
       </div>
     </header>
     <div class="screen-scroll">
-      <div class="tabs" role="tablist">
-        <button class="tab is-active" data-tab-target="produccion" role="tab" aria-selected="true" type="button">Antes de producir</button>
-        <button class="tab" data-tab-target="venta" role="tab" aria-selected="false" type="button">Antes de vender</button>
+      <div class="tabs" role="tablist" id="produccion-chips">
+        <button class="tab is-active" data-scroll-target="prod-producir" type="button">Antes de producir</button>
+        <button class="tab" data-scroll-target="prod-calidad" type="button">Control de calidad</button>
+        <button class="tab" data-scroll-target="prod-publicar" type="button">Antes de publicar</button>
+        <button class="tab" data-scroll-target="prod-fotos" type="button">Fotos que venden</button>
       </div>
 
-      <div class="tab-panel" id="panel-produccion">
+      <!-- 1. ANTES DE PRODUCIR -->
+      <div class="gallery-section" id="prod-producir">
+        <div class="gallery-section-head">
+          <span class="gallery-section-title">Antes de producir</span>
+          <span class="checklist-count" id="count-producir">0/6</span>
+        </div>
         <div class="card checklist-card">
-          <div class="checklist-head">
-            <p class="section-label">Checklist de producción</p>
-            <span class="checklist-count" id="count-produccion">0/7</span>
-          </div>
-          <ul class="checklist" id="list-produccion"></ul>
+          <ul class="checklist" id="list-producir"></ul>
         </div>
       </div>
 
-      <div class="tab-panel" id="panel-venta" hidden>
-        <div class="card checklist-card">
-          <div class="checklist-head">
-            <p class="section-label">Checklist antes de vender</p>
-            <span class="checklist-count" id="count-venta">0/6</span>
-          </div>
-          <ul class="checklist" id="list-venta"></ul>
+      <!-- 2. CONTROL DE CALIDAD -->
+      <div class="gallery-section" id="prod-calidad">
+        <div class="gallery-section-head">
+          <span class="gallery-section-title">Control de calidad</span>
+          <span class="checklist-count" id="count-calidad">0/8</span>
         </div>
+        <p class="prod-section-sub">Antes de considerar una vela lista para vender, revisa estos puntos.</p>
+        <div class="card checklist-card">
+          <ul class="checklist" id="list-calidad"></ul>
+        </div>
+      </div>
+
+      <!-- 3. ANTES DE PUBLICAR -->
+      <div class="gallery-section" id="prod-publicar">
+        <div class="gallery-section-head">
+          <span class="gallery-section-title">Antes de publicar</span>
+          <span class="checklist-count" id="count-publicar">0/9</span>
+        </div>
+        <div class="card checklist-card">
+          <ul class="checklist" id="list-publicar"></ul>
+        </div>
+      </div>
+
+      <!-- 4. FOTOS QUE VENDEN -->
+      <div class="gallery-section" id="prod-fotos">
+        <div class="gallery-section-head">
+          <span class="gallery-section-title">Fotos que venden</span>
+        </div>
+        <div class="card photo-guide-card" id="photo-guide"></div>
       </div>
 
       <div class="bottom-spacer"></div>

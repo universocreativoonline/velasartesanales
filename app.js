@@ -11,31 +11,55 @@
   const LS_KEYS = {
     welcomed: "vs_welcomed",
     checklistProduccion: "vs_checklist_produccion",
-    checklistVenta: "vs_checklist_venta",
+    checklistCalidad: "vs_checklist_calidad",
+    checklistPublicar: "vs_checklist_publicar",
     lastScreen: "vs_last_screen",
   };
 
   /* ---------------------------------------------------------
      CONTENT DATA
      --------------------------------------------------------- */
-  const CHECKLIST_PRODUCCION = [
-    "Moldes limpios",
-    "Cera pesada",
-    "Fragancia preparada",
-    "Colorante listo",
-    "Temperatura correcta",
-    "Recipientes preparados",
-    "Etiquetas listas",
+  /* ---------------------------------------------------------
+     PRODUCCIÓN — checklists con explicación breve opcional
+     --------------------------------------------------------- */
+  const CHECKLIST_PRODUCIR = [
+    { label: "Moldes limpios", info: "Un molde con restos de cera o polvo puede generar burbujas o manchas en la superficie. Revísalo antes de cada vertido." },
+    { label: "Cera pesada", info: "Pesa la cera con precisión antes de derretirla. Calcular a ojo es la causa más común de que falte o sobre cera para el molde." },
+    { label: "Fragancia preparada", info: "Ten la fragancia medida y lista antes de que la cera alcance la temperatura de mezcla, para no perder tiempo mientras se enfría." },
+    { label: "Colorante listo", info: "Prepara el colorante en la cantidad exacta antes de verter. Ajustarlo a último momento genera vetas o tonos desiguales." },
+    { label: "Temperatura correcta", info: "Verifica la temperatura recomendada para el tipo de cera que estás utilizando antes de incorporar la fragancia. Trabajar fuera del rango adecuado puede afectar el resultado final." },
+    { label: "Recipientes preparados", info: "Verifica que los recipientes estén limpios, secos y a temperatura ambiente antes de verter. Un recipiente frío puede generar grietas o mala adherencia." },
   ];
 
-  const CHECKLIST_VENTA = [
-    "Fotos con buena luz",
-    "Precio calculado",
-    "Empaque revisado",
-    "Descripción del producto lista",
-    "Publicación programada",
-    "Método de pago definido",
+  const CHECKLIST_CALIDAD = [
+    { label: "La superficie quedó uniforme", info: "Una superficie pareja indica que la cera se enfrió de forma controlada. La textura irregular suele deberse a cambios bruscos de temperatura." },
+    { label: "No presenta grietas", info: "Las grietas superficiales suelen aparecer cuando la vela se enfría demasiado rápido. Revisa la superficie completa, no solo el centro." },
+    { label: "No tiene hundimientos importantes", info: "Un hundimiento leve en el centro es normal en ceras de soja. Si es profundo, se puede corregir con un segundo vertido fino antes de vender." },
+    { label: "El recipiente está limpio", info: "Restos de cera derramada o huellas en el vidrio bajan la percepción de calidad del producto terminado." },
+    { label: "El pabilo está correctamente centrado", info: "Un pabilo descentrado puede afectar la forma en que la vela se consume. Revisa su posición antes de entregar el producto." },
+    { label: "La etiqueta está correctamente colocada", info: "Una etiqueta torcida o con burbujas de aire se nota de inmediato en fotos de producto. Revísala antes de dar la vela por terminada." },
+    { label: "La vela ha cumplido el tiempo de curado correspondiente", info: "El aroma en frío alcanza su punto máximo recién después del tiempo de curado recomendado para el tipo de cera. Venderla antes es la causa más común de reclamos por poco aroma." },
+    { label: "El acabado general es presentable", info: "Revisa el conjunto completo (vela, recipiente, etiqueta) como lo vería tu cliente al recibirlo, no solo cada parte por separado." },
   ];
+
+  const CHECKLIST_PUBLICAR = [
+    { label: "Fotos con buena iluminación" },
+    { label: "Se muestra claramente el tamaño de la vela" },
+    { label: "El aroma está indicado" },
+    { label: "El precio está calculado" },
+    { label: "El costo de envío está definido" },
+    { label: "La descripción explica qué recibe el cliente" },
+    { label: "El tiempo de entrega está definido" },
+    { label: "El stock disponible está actualizado" },
+    { label: "El método de pago está definido" },
+  ];
+
+  const PHOTO_GUIDE = [
+    { num: 1, title: "Producto", body: "Muestra la vela completa con buena iluminación y fondo limpio." },
+    { num: 2, title: "Detalle", body: "Muestra de cerca el acabado, el recipiente, la etiqueta, la textura o la decoración." },
+    { num: 3, title: "Contexto", body: "Muestra la vela en un ambiente que permita imaginar cómo se verá en casa." },
+  ];
+  const PHOTO_GUIDE_TIP = "No utilices tres fotografías prácticamente iguales. Cada imagen debe cumplir una función diferente.";
 
   const TIPS = [
     { title: "Elegí el pabilo correcto", body: "Un pabilo muy fino deja la vela con un pozo de cera sin quemar; uno muy grueso genera humo y una llama inestable. Hacé pruebas pequeñas antes de producir en volumen." },
@@ -82,6 +106,7 @@
     {
       id: "aromaticas",
       label: "Velas aromáticas",
+      shortLabel: "Aromáticas",
       image: "assets/inspiracion/vela_aromatica.jpg",
       cards: [
         {
@@ -197,6 +222,7 @@
     {
       id: "decorativas",
       label: "Velas decorativas",
+      shortLabel: "Decorativas",
       image: "assets/inspiracion/vela_minimalista.jpg",
       cards: [
         {
@@ -294,6 +320,7 @@
     {
       id: "premium",
       label: "Velas premium",
+      shortLabel: "Premium",
       image: "assets/inspiracion/vela_premium.jpg",
       cards: [
         {
@@ -395,6 +422,7 @@
     {
       id: "florales",
       label: "Velas florales",
+      shortLabel: "Florales",
       image: "assets/inspiracion/vela_floral.jpg",
       cards: [
         {
@@ -501,7 +529,8 @@
     {
       id: "navidenas",
       label: "Velas navideñas",
-      image: "assets/inspiracion/velas_navideñas_1.jpg",
+      shortLabel: "Navideñas",
+      image: "assets/inspiracion/velas_navidenas_1.jpg",
       cards: [
         {
           title: "¿Cuándo comenzar la producción para la temporada navideña?",
@@ -591,6 +620,7 @@
     {
       id: "regalo",
       label: "Velas para regalo",
+      shortLabel: "Para regalo",
       image: "assets/inspiracion/vela_de_regalo.jpg",
       cards: [
         {
@@ -796,9 +826,11 @@
     });
     lsSet(LS_KEYS.lastScreen, name);
     window.scrollTo(0, 0);
+    refreshScrollableTabs();
 
-    if (name === "produccion" && opts.tab) {
-      setProduccionTab(opts.tab);
+    if (name === "produccion" && opts.section) {
+      const target = document.getElementById(opts.section);
+      if (target) setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     }
     if (name === "mas" && opts.tab) {
       setMasTab(opts.tab);
@@ -903,24 +935,27 @@
   });
 
   /* ---------------------------------------------------------
-     PRODUCCIÓN — checklists + tabs + celebration
+     PRODUCCIÓN — checklists + chips de navegación + celebración
      --------------------------------------------------------- */
-  const listProduccionEl = document.getElementById("list-produccion");
-  const listVentaEl = document.getElementById("list-venta");
-  const countProduccionEl = document.getElementById("count-produccion");
-  const countVentaEl = document.getElementById("count-venta");
+  const listProducirEl = document.getElementById("list-producir");
+  const listCalidadEl = document.getElementById("list-calidad");
+  const listPublicarEl = document.getElementById("list-publicar");
+  const countProducirEl = document.getElementById("count-producir");
+  const countCalidadEl = document.getElementById("count-calidad");
+  const countPublicarEl = document.getElementById("count-publicar");
 
   const celebrationOverlay = document.getElementById("celebration-overlay");
   const celebrationText = document.getElementById("celebration-text");
   const celebrationCloseBtn = document.getElementById("celebration-close-btn");
 
   const CELEBRATION_MESSAGES = {
-    produccion: "Todo está listo para comenzar tu producción.",
-    venta: "Todo está listo para tu próxima venta.",
+    producir: "Todo está listo para comenzar tu producción.",
+    calidad: "Tu vela pasó el control de calidad.",
+    publicar: "Todo está listo para publicar tu producto.",
   };
 
-  function showCelebration(tabKey) {
-    celebrationText.textContent = CELEBRATION_MESSAGES[tabKey] || CELEBRATION_MESSAGES.produccion;
+  function showCelebration(sectionKey) {
+    celebrationText.textContent = CELEBRATION_MESSAGES[sectionKey] || CELEBRATION_MESSAGES.producir;
     celebrationOverlay.hidden = false;
     // restart confetti animation
     const confettiSpans = celebrationOverlay.querySelectorAll(".celebration-confetti span");
@@ -935,60 +970,105 @@
     if (e.target === celebrationOverlay) celebrationOverlay.hidden = true;
   });
 
-  function renderChecklist(items, storageKey, listEl, countEl, tabKey) {
+  const CHECK_SVG_SMALL = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 13l4.5 4.5L19 8" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function renderChecklist(items, storageKey, listEl, countEl, sectionKey) {
     const state = lsGet(storageKey, {});
     listEl.innerHTML = "";
 
-    items.forEach((label, idx) => {
+    items.forEach((item, idx) => {
       const checked = !!state[idx];
+      const hasInfo = !!item.info;
       const li = document.createElement("li");
       li.className = "checklist-item" + (checked ? " is-checked" : "");
+
       li.innerHTML = `
-        <span class="checklist-box" aria-hidden="true">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 13l4.5 4.5L19 8" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="checklist-text">${label}</span>
+        <div class="checklist-row">
+          <button type="button" class="checklist-toggle">
+            <span class="checklist-box" aria-hidden="true">${CHECK_SVG_SMALL}</span>
+            <span class="checklist-text">${item.label}</span>
+          </button>
+          ${hasInfo ? `
+            <button type="button" class="checklist-info-btn" aria-expanded="false" aria-label="Ver explicación">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          ` : ""}
+        </div>
+        ${hasInfo ? `
+          <div class="checklist-info-body">
+            <p class="checklist-info-text">${item.info}</p>
+          </div>
+        ` : ""}
       `;
-      li.addEventListener("click", () => {
+
+      li.querySelector(".checklist-toggle").addEventListener("click", () => {
         const s = lsGet(storageKey, {});
         const wasComplete = items.every((_, i) => s[i]);
         s[idx] = !s[idx];
         lsSet(storageKey, s);
-        renderChecklist(items, storageKey, listEl, countEl, tabKey);
+        renderChecklist(items, storageKey, listEl, countEl, sectionKey);
         renderHomeProgress();
         const isCompleteNow = items.every((_, i) => s[i]);
         if (!wasComplete && isCompleteNow) {
-          showCelebration(tabKey);
+          showCelebration(sectionKey);
         }
       });
+
+      const infoBtn = li.querySelector(".checklist-info-btn");
+      if (infoBtn) {
+        infoBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = li.classList.toggle("is-info-open");
+          infoBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+      }
+
       listEl.appendChild(li);
     });
 
     const doneCount = items.filter((_, idx) => state[idx]).length;
-    countEl.textContent = `${doneCount}/${items.length}`;
+    countEl.textContent = doneCount === items.length ? "✓ Todo revisado" : `${doneCount}/${items.length}`;
+    countEl.classList.toggle("is-complete", doneCount === items.length);
   }
 
   function renderChecklists() {
-    renderChecklist(CHECKLIST_PRODUCCION, LS_KEYS.checklistProduccion, listProduccionEl, countProduccionEl, "produccion");
-    renderChecklist(CHECKLIST_VENTA, LS_KEYS.checklistVenta, listVentaEl, countVentaEl, "venta");
+    renderChecklist(CHECKLIST_PRODUCIR, LS_KEYS.checklistProduccion, listProducirEl, countProducirEl, "producir");
+    renderChecklist(CHECKLIST_CALIDAD, LS_KEYS.checklistCalidad, listCalidadEl, countCalidadEl, "calidad");
+    renderChecklist(CHECKLIST_PUBLICAR, LS_KEYS.checklistPublicar, listPublicarEl, countPublicarEl, "publicar");
   }
 
-  function setProduccionTab(tab) {
-    const tabs = document.querySelectorAll('#screen-produccion .tab');
-    const panelProd = document.getElementById("panel-produccion");
-    const panelVenta = document.getElementById("panel-venta");
-    tabs.forEach((t) => {
-      const active = t.dataset.tabTarget === tab;
-      t.classList.toggle("is-active", active);
-      t.setAttribute("aria-selected", active ? "true" : "false");
+  /* Chips de Producción: navegan haciendo scroll a la sección, no ocultan contenido */
+  document.querySelectorAll('#produccion-chips .tab').forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const target = document.getElementById(chip.dataset.scrollTarget);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.querySelectorAll('#produccion-chips .tab').forEach((t) => t.classList.remove("is-active"));
+      chip.classList.add("is-active");
     });
-    panelProd.hidden = tab !== "produccion";
-    panelVenta.hidden = tab !== "venta";
-  }
-
-  document.querySelectorAll('#screen-produccion .tab').forEach((t) => {
-    t.addEventListener("click", () => setProduccionTab(t.dataset.tabTarget));
   });
+
+  /* ---------------------------------------------------------
+     PRODUCCIÓN — mini guía "Fotos que venden"
+     --------------------------------------------------------- */
+  function renderPhotoGuide() {
+    const el = document.getElementById("photo-guide");
+    if (!el) return;
+    const stepsHtml = PHOTO_GUIDE.map((p) => `
+      <li class="photo-guide-item">
+        <span class="photo-guide-num">${p.num}</span>
+        <span class="photo-guide-text">
+          <span class="photo-guide-title">${p.title}</span>
+          <span class="photo-guide-body">${p.body}</span>
+        </span>
+      </li>
+    `).join("");
+    el.innerHTML = `
+      <ul class="photo-guide-list">${stepsHtml}</ul>
+      <div class="photo-guide-tip">
+        <p>${PHOTO_GUIDE_TIP}</p>
+      </div>
+    `;
+  }
 
   /* ---------------------------------------------------------
      HOME — progress teaser (production checklists)
@@ -997,28 +1077,28 @@
 
   function renderHomeProgress() {
     const prodState = lsGet(LS_KEYS.checklistProduccion, {});
-    const ventaState = lsGet(LS_KEYS.checklistVenta, {});
+    const publicarState = lsGet(LS_KEYS.checklistPublicar, {});
 
-    const prodDone = CHECKLIST_PRODUCCION.filter((_, i) => prodState[i]).length;
-    const ventaDone = CHECKLIST_VENTA.filter((_, i) => ventaState[i]).length;
-    const prodPct = prodDone / CHECKLIST_PRODUCCION.length;
-    const ventaPct = ventaDone / CHECKLIST_VENTA.length;
+    const prodDone = CHECKLIST_PRODUCIR.filter((_, i) => prodState[i]).length;
+    const publicarDone = CHECKLIST_PUBLICAR.filter((_, i) => publicarState[i]).length;
+    const prodPct = prodDone / CHECKLIST_PRODUCIR.length;
+    const publicarPct = publicarDone / CHECKLIST_PUBLICAR.length;
 
     const prodCircle = document.querySelector("#mini-ring-produccion .mini-ring-fill");
     const ventaCircle = document.querySelector("#mini-ring-venta .mini-ring-fill");
     prodCircle.style.strokeDasharray = MINI_CIRCUMFERENCE.toFixed(1);
     prodCircle.style.strokeDashoffset = (MINI_CIRCUMFERENCE * (1 - prodPct)).toFixed(1);
     ventaCircle.style.strokeDasharray = MINI_CIRCUMFERENCE.toFixed(1);
-    ventaCircle.style.strokeDashoffset = (MINI_CIRCUMFERENCE * (1 - ventaPct)).toFixed(1);
+    ventaCircle.style.strokeDashoffset = (MINI_CIRCUMFERENCE * (1 - publicarPct)).toFixed(1);
 
-    const totalDone = prodDone + ventaDone;
+    const totalDone = prodDone + publicarDone;
     const sub = document.getElementById("home-progress-sub");
     if (totalDone === 0) {
       sub.textContent = "Todavía no marcaste ningún ítem";
-    } else if (prodDone === CHECKLIST_PRODUCCION.length && ventaDone === CHECKLIST_VENTA.length) {
-      sub.textContent = "¡Las dos checklists están completas!";
+    } else if (prodDone === CHECKLIST_PRODUCIR.length && publicarDone === CHECKLIST_PUBLICAR.length) {
+      sub.textContent = "¡Producción y publicación están al día!";
     } else {
-      sub.textContent = `Producción ${prodDone}/${CHECKLIST_PRODUCCION.length} · Venta ${ventaDone}/${CHECKLIST_VENTA.length}`;
+      sub.textContent = `Antes de producir ${prodDone}/${CHECKLIST_PRODUCIR.length} · Antes de publicar ${publicarDone}/${CHECKLIST_PUBLICAR.length}`;
     }
   }
 
@@ -1116,7 +1196,7 @@
       const chip = document.createElement("button");
       chip.type = "button";
       chip.className = "tab" + (i === 0 ? " is-active" : "");
-      chip.textContent = cat.label;
+      chip.textContent = cat.shortLabel || cat.label;
       chip.addEventListener("click", () => {
         const target = document.getElementById("gallery-" + cat.id);
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1240,11 +1320,12 @@
   document.getElementById("btn-reset-progress").addEventListener("click", async () => {
     const ok = await confirmDialog(
       "Restablecer progreso",
-      "Se pondrán en cero ambas checklists de producción y venta. Esta acción no se puede deshacer."
+      "Se pondrán en cero las tres checklists de Producción (antes de producir, control de calidad y antes de publicar). Esta acción no se puede deshacer."
     );
     if (!ok) return;
     lsSet(LS_KEYS.checklistProduccion, {});
-    lsSet(LS_KEYS.checklistVenta, {});
+    lsSet(LS_KEYS.checklistCalidad, {});
+    lsSet(LS_KEYS.checklistPublicar, {});
     renderChecklists();
     renderHomeProgress();
     showToast("Progreso restablecido");
@@ -1262,6 +1343,26 @@
   });
 
   /* ---------------------------------------------------------
+     TABS / CHIPS — indicador visual de scroll horizontal
+     Aplica el difuminado del borde derecho solo cuando la barra
+     realmente tiene contenido oculto por overflow (por ejemplo,
+     las 6 categorías de Inspiración no entran completas en
+     pantallas angostas).
+     --------------------------------------------------------- */
+  function refreshScrollableTabs() {
+    document.querySelectorAll(".tabs").forEach((el) => {
+      const scrollable = el.scrollWidth > el.clientWidth + 2;
+      el.classList.toggle("is-scrollable", scrollable);
+    });
+  }
+
+  let scrollTabsResizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(scrollTabsResizeTimer);
+    scrollTabsResizeTimer = setTimeout(refreshScrollableTabs, 150);
+  });
+
+  /* ---------------------------------------------------------
      INIT
      --------------------------------------------------------- */
   function init() {
@@ -1270,10 +1371,12 @@
     setDailyQuote();
     renderChecklists();
     renderHomeProgress();
+    renderPhotoGuide();
     renderInspiracionChips();
     renderInspiracionGallery();
     renderTipsAndFaq();
     renderSafety();
+    refreshScrollableTabs();
 
     const lastScreen = lsGet(LS_KEYS.lastScreen, "inicio");
     // "curso" no longer exists — fall back to inicio if an old install has it saved
